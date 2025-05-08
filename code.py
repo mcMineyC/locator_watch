@@ -63,8 +63,16 @@ splash = displayio.Group()
 display.root_group = splash
 
 # Load fonts
-font_big = bitmap_font.load_font(font_file_big)
-font_small = bitmap_font.load_font(font_file_small)
+font_big = False
+font_small = False
+
+bg_bitmap = False
+
+async def load_fonts():
+    global font_big, font_small
+    font_big = bitmap_font.load_font(font_file_big)
+    font_small = bitmap_font.load_font(font_file_small)
+
 
 # Show background texture
 async def show_bg():
@@ -95,7 +103,6 @@ asyncio.run(main())
 pool = socketpool.SocketPool(wifi.radio)
 ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
 
-bg_bitmap = False
 
 color_palette = displayio.Palette(4)
 color_palette[0] = 0xFFFFFF # Clock
