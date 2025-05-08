@@ -25,8 +25,17 @@ fi
 
 if [ "$INSTALLED" == "false" ]; then
     while true; do
-        $COMMAND
-        sleep 1
+        # Check if files have been changed
+        CHANGED_FILES=$(git diff --name-only HEAD HEAD~1)
+        if [ -z "$CHANGED_FILES" ]; then
+            echo "No changes to commit."
+            sleep 1
+            continue
+        else
+            echo "Changes detected"
+            $COMMAND
+            sleep 1
+        fi
     done
 fi
 
