@@ -9,7 +9,7 @@ def get_clock_text(ntp):
     utc_struct = ntp.datetime
     
     # Convert to PST manually
-    pst_hour = (utc_struct.tm_hour - 7) % 24
+    pst_hour = utc_struct.tm_hour
     pst_day = utc_struct.tm_mday
     
     # Determine AM/PM
