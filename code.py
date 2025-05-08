@@ -97,11 +97,11 @@ async def setup_wifi():
         return
     try:
         wifi.radio.connect(wifi_ssid, wifi_password)
-    except ConnectionError:
+    except Exception:
         print("Failed to connect to WiFi with provided credentials")
         splash.insert(0, label.Label(
             terminalio.FONT,
-            text="Wifi not found\nReset board",
+            text="Wifi not found",
             color=0xFF0000,
             scale=2,
             anchor_point=(0.5, 0.5),
