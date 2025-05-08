@@ -65,8 +65,7 @@ echo "$CHANGED_FILES" | while IFS= read -r line; do
     if [ "$action" == "D" ]; then
         echo "Deleting file: $file_path"
         rm "$CP_PATH/$file_path"
-    elif [ "$action" == "M" ]; then
-    elif [ "$action" == "??" ]; then
+    elif [ "$action" == "M" ] || [ "$action" == "??" ]; then
         echo "Copying file: $file_path"
         cp "$file_path" "$CP_PATH/$file_path"
     else
