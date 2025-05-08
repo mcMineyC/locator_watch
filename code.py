@@ -24,6 +24,7 @@ import wifi
 import adafruit_ntp
 
 from utils import *
+import asyncio
 
 BORDER_WIDTH = 20
 TEXT_SCALE = 3
@@ -66,26 +67,30 @@ font_big = bitmap_font.load_font(font_file_big)
 font_small = bitmap_font.load_font(font_file_small)
 
 # Show background texture
-def show_bg():
+async def show_bg():
     global bg_bitmap
     if bg_bitmap is False: 
         bg_bitmap = displayio.OnDiskBitmap("/dirt.bmp")
     bg_sprite = displayio.TileGrid(bg_bitmap, pixel_shader=bg_bitmap.pixel_shader, x=0, y=0)
     splash.append(bg_sprite)
 
-if(not fast): show_bg() # Don't display bitmap in fast mode
-
-
-
 # Set up WiFi
-if wifi_ssid is None:
-    print("WiFi credentials are kept in settings.toml, please add them there!")
-    # raise ValueError("SSID not found in environment variables")
-try:
-    wifi.radio.connect(wifi_ssid, wifi_password)
-except ConnectionError:
-    print("Failed to connect to WiFi with provided credentials")
-    # raise LookupError("Failed to connect to WiFi")
+async def setup_wifi():
+    if wifi_ssid is None:
+        print("WiFi credentials are kept in settings.toml, please add them there!")
+        return
+    try:
+        wifi.radio.connect(wifi_ssid, wifi_password)
+    except ConnectionError:
+        print("Failed to connect to WiFi with provided credentials")
+
+# Run both tasks in parallel
+async def main():
+    if not fast:
+        await show_bg()
+    await setup_wifi()
+
+asyncio.run(main())
 
 pool = socketpool.SocketPool(wifi.radio)
 ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
