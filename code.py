@@ -57,6 +57,7 @@ display_bus = FourWire(spi, command=tft_dc, chip_select=tft_cs, reset=tft_rst)
 
 # Set up display
 display = ST7789(display_bus, width=320, height=240, rotation=270, auto_refresh=True)
+display.auto_refresh = False # Don't show bg yet
 
 # Make the display context
 splash = displayio.Group()
@@ -80,19 +81,19 @@ async def show_bg():
         bg_bitmap = displayio.OnDiskBitmap("/dirt.bmp")
     bg_sprite = displayio.TileGrid(bg_bitmap, pixel_shader=bg_bitmap.pixel_shader, x=0, y=0)
     splash.append(bg_sprite)
-
-# Set up WiFi
-async def setup_wifi():
-    if wifi_ssid is None:
-        print("WiFi credentials are kept in settings.toml, please add them there!")
-        splash.insert(0, label.Label(
+main_label = label.Label(
             terminalio.FONT,
-            text="No Wifi creds\nCheck log",
+            text="Loading...",
             color=0xFF0000,
             scale=2,
             anchor_point=(0.5, 0.5),
             anchored_position=(display.width // 2, display.height // 2),
-        ))
+        )
+# Set up WiFi
+async def setup_wifi():
+    if wifi_ssid is None:
+        print("WiFi credentials are kept in settings.toml, please add them there!")
+        
         display.refresh()
         return
     try:
@@ -144,7 +145,6 @@ color_palette[1] = 0xFFFFFF # Date
 color_palette[2] = 0x00FF00 # Lat
 color_palette[3] = 0xFF0000 # Long
 
-display.auto_refresh = False # Don't show bg yet
 
 
 def render_text(text, font, x, y, color=0xFFFFFF):
