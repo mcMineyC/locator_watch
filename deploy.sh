@@ -51,7 +51,7 @@ else
 fi
 
 echo "Copying code to CircuitPython drive"
-
+CP_PATH="$CP_PATH/CIRCUITPY"
 # Check if the CircuitPython drive is mounted
 if [ ! -d "$CP_PATH" ]; then
     echo "CircuitPython drive not found at $CP_PATH"
