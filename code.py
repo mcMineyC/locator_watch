@@ -99,6 +99,15 @@ async def setup_wifi():
         wifi.radio.connect(wifi_ssid, wifi_password)
     except ConnectionError:
         print("Failed to connect to WiFi with provided credentials")
+        splash.insert(0, label.Label(
+            terminalio.FONT,
+            text="Wifi not found\nReset board",
+            color=0xFF0000,
+            scale=2,
+            anchor_point=(0.5, 0.5),
+            anchored_position=(display.width // 2, display.height // 2),
+        ))
+        display.refresh()
 
 
 pool = socketpool.SocketPool(wifi.radio)
