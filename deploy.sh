@@ -5,7 +5,7 @@ CHANGED_FILES=$(git diff --name-only HEAD HEAD~1)
 
 # Check if there are any changed files
 if [ -z "$CHANGED_FILES" ]; then
-    echo "No changes to commit."
+    echo "No changes to commit"
     exit 0
 fi
 
