@@ -93,7 +93,7 @@ async def setup_wifi():
 
 
 pool = socketpool.SocketPool(wifi.radio)
-ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
+ntp = adafruit_ntp.NTP(pool, tz_offset=-7, cache_seconds=3600)
 
 # Run both tasks in parallel
 async def main():
