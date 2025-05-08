@@ -89,7 +89,8 @@ display.auto_refresh = False # Don't show bg yet
 # Show background texture
 def show_bg():
     global bg_bitmap
-    if(bg_bitmap != False): bg_bitmap = displayio.OnDiskBitmap("/dirt.bmp")
+    if bg_bitmap is False: 
+        bg_bitmap = displayio.OnDiskBitmap("/dirt.bmp")
     bg_sprite = displayio.TileGrid(bg_bitmap, pixel_shader=bg_bitmap.pixel_shader, x=0, y=0)
     splash.append(bg_sprite)
 
