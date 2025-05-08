@@ -93,9 +93,12 @@ async def setup_wifi():
 
 # Run both tasks in parallel
 async def main():
-    await load_fonts()
     if not fast:
+        print("Loading bg")
         await show_bg()
+    print("Loading fonts")
+    await load_fonts()
+    print("Connecting to WiFi")
     await setup_wifi()
 
 asyncio.run(main())
