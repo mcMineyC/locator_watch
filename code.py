@@ -91,6 +91,10 @@ async def setup_wifi():
     except ConnectionError:
         print("Failed to connect to WiFi with provided credentials")
 
+
+pool = socketpool.SocketPool(wifi.radio)
+ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
+
 # Run both tasks in parallel
 async def main():
     if not fast:
@@ -114,8 +118,6 @@ async def main():
 
 asyncio.run(main())
 
-pool = socketpool.SocketPool(wifi.radio)
-ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
 
 
 color_palette = displayio.Palette(4)
