@@ -119,7 +119,7 @@ async def main():
         print("Loading bg")
         await show_bg()
     print("Loading fonts")
-    load_fonts()
+    await load_fonts()
     print("Connecting to WiFi")
     await setup_wifi()
     print("WiFi connected")
