@@ -60,17 +60,14 @@ fi
 
 # Process each changed file line by line
 echo "$CHANGED_FILES" | while IFS= read -r line; do
-    echo "Processing file: $line"
     file_path=$(echo "$line" | awk '{print $2}')
     action=$(echo "$line" | awk '{print $1}')
     if [ "$action" == "D" ]; then
-        echo "Skipping deleted file: $file_path"
+        echo "Deleting file: $file_path"
         rm "$CP_PATH/$file_path"
     elif [ "$action" == "M" ]; then
-        echo "Copying modified file: $file_path"
-        cp "$file_path" "$CP_PATH/$file_path"
     elif [ "$action" == "??" ]; then
-        echo "Copying added file: $file_path"
+        echo "Copying file: $file_path"
         cp "$file_path" "$CP_PATH/$file_path"
     else
         echo "Unknown action $action for file: $file_path"
