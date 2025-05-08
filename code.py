@@ -84,7 +84,7 @@ async def show_bg():
 main_label = label.Label(
             terminalio.FONT,
             text="Loading...",
-            color=0xFF0000,
+            color=0x000000,
             scale=2,
             anchor_point=(0.5, 0.5),
             anchored_position=(display.width // 2, display.height // 2),
