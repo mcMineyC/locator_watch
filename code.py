@@ -116,7 +116,6 @@ ntp = adafruit_ntp.NTP(pool, tz_offset=-7, cache_seconds=3600)
 # Run both tasks in parallel
 async def main():
     await load_fonts()
-
     if not fast:
         print("Loading bg")
         await show_bg()
