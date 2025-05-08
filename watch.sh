@@ -25,8 +25,8 @@ fi
 
 if [ "$INSTALLED" == "false" ]; then
     while true; do
-        # Check if files have been changed
-        CHANGED_FILES=$(git diff --name-only HEAD HEAD~1)
+        # Check if there are modified but uncommitted files
+        CHANGED_FILES=$(git status --porcelain | grep '^[ M]')
         if [ -z "$CHANGED_FILES" ]; then
             echo "No changes to commit."
             sleep 1
