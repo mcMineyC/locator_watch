@@ -31,7 +31,7 @@ wifi_ssid = os.getenv("CIRCUITPY_WIFI_SSID")
 wifi_password = os.getenv("CIRCUITPY_WIFI_PASSWORD")
 font_file_big = "Minecraft-Regular-20.bdf"
 font_file_small = "Minecraft-Regular-10.bdf"
-fast = False # Fast mode doesn't render background
+fast = True # Fast mode doesn't render background
 
 lat = -3518
 long = 3984
