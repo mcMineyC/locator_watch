@@ -59,6 +59,7 @@ if [ ! -d "$CP_PATH" ]; then
 fi
 # Copy the changed files to the CircuitPython drive
 for file in $CHANGED_FILES; do
+    echo "Processing file: $file"
     file_path=$(echo "$file" | awk '{print $2}')
     action=$(echo "$file" | awk '{print $1}')
     if [ "$action" == "D" ]; then
