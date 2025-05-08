@@ -95,21 +95,14 @@ display.refresh()
 async def setup_wifi():
     if wifi_ssid is None:
         print("WiFi credentials are kept in settings.toml, please add them there!")
-        
+        main_label.text = "No WiFi creds\nCheck log"
         display.refresh()
         return
     try:
         wifi.radio.connect(wifi_ssid, wifi_password)
     except Exception:
         print("Failed to connect to WiFi with provided credentials")
-        splash.insert(0, label.Label(
-            terminalio.FONT,
-            text="Wifi not found",
-            color=0xFF0000,
-            scale=2,
-            anchor_point=(0.5, 0.5),
-            anchored_position=(display.width // 2, display.height // 2),
-        ))
+        main_label.text = "Failed to connect to WiFi"
         display.refresh()
 
 
