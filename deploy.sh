@@ -3,11 +3,11 @@
 # Get the list of changed files
 CHANGED_FILES=$(git status --porcelain)
 
-# Check if there are any changed files
-if [ -z "$CHANGED_FILES" ]; then
-    echo "No changes to commit"
-    exit 0
-fi
+# # Check if there are any changed files
+# if [ -z "$CHANGED_FILES" ]; then
+#     echo "No changes to commit"
+#     exit 0
+# fi
 
 echo "Committing changes"
 git add .
