@@ -85,6 +85,15 @@ async def show_bg():
 async def setup_wifi():
     if wifi_ssid is None:
         print("WiFi credentials are kept in settings.toml, please add them there!")
+        splash.insert(0, label.Label(
+            terminalio.FONT,
+            text="No WiFi creds\nCheck log",
+            color=0xFF0000,
+            scale=2,
+            anchor_point=(0.5, 0.5),
+            anchored_position=(display.width // 2, display.height // 2),
+        ))
+        display.refresh()
         return
     try:
         wifi.radio.connect(wifi_ssid, wifi_password)
