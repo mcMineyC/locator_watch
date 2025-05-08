@@ -87,7 +87,7 @@ async def setup_wifi():
         print("WiFi credentials are kept in settings.toml, please add them there!")
         splash.insert(0, label.Label(
             terminalio.FONT,
-            text="No WiFi creds\nCheck log",
+            text="No Wifi creds\nCheck log",
             color=0xFF0000,
             scale=2,
             anchor_point=(0.5, 0.5),
