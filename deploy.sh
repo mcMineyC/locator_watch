@@ -61,5 +61,5 @@ fi
 for file in $CHANGED_FILES; do
     # Check if the file is a Python file
     cp "$file" "$CP_PATH"
-    echo "Copied $file to $CP_PATH"
 done
+echo "Copied $(echo "$CHANGED_FILES" | wc -l) files to $CP_PATH"
