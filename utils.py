@@ -1,4 +1,3 @@
-import time
 def prep_loc(num):
     return "{:04}".format(str(num))
 

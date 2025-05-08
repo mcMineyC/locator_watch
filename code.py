@@ -31,7 +31,7 @@ wifi_ssid = os.getenv("CIRCUITPY_WIFI_SSID")
 wifi_password = os.getenv("CIRCUITPY_WIFI_PASSWORD")
 font_file_big = "Minecraft-Regular-20.bdf"
 font_file_small = "Minecraft-Regular-10.bdf"
-fast = False
+fast = False # Fast mode doesn't render background
 
 lat = -3518
 long = 3984
@@ -41,22 +41,25 @@ displayio.release_displays()
 spi = busio.SPI(clock=board.GP18, MOSI=board.GP19)
 print("Setting up SPI for 24MHz")
 while not spi.try_lock():
-        pass
+    pass
 spi.configure(baudrate=24000000)  # Configure SPI for 24MHz
 spi.unlock()
 print("SPI setup complete")
+
+# Set up display SPI bus
 tft_cs = board.GP17
 tft_dc = board.GP20
 tft_rst = board.GP21
-
 display_bus = FourWire(spi, command=tft_dc, chip_select=tft_cs, reset=tft_rst)
 
+# Set up display
 display = ST7789(display_bus, width=320, height=240, rotation=270, auto_refresh=True)
-display.refresh(target_frames_per_second=80)
+
 # Make the display context
 splash = displayio.Group()
 display.root_group = splash
 
+# Set up WiFi
 if wifi_ssid is None:
     print("WiFi credentials are kept in settings.toml, please add them there!")
     raise ValueError("SSID not found in environment variables")
@@ -65,12 +68,12 @@ try:
     wifi.radio.connect(wifi_ssid, wifi_password)
 except ConnectionError:
     print("Failed to connect to WiFi with provided credentials")
-    raise
+    raise LookupError("Failed to connect to WiFi")
 
 pool = socketpool.SocketPool(wifi.radio)
 ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
 
-bg_bitmap = displayio.OnDiskBitmap("/dirt.bmp")
+bg_bitmap = False
 font_big = bitmap_font.load_font(font_file_big)
 font_small = bitmap_font.load_font(font_file_small)
 
@@ -85,9 +88,11 @@ display.auto_refresh = False # Don't show bg yet
 
 # Show background texture
 def show_bg():
+    if(bg_bitmap != False): bg_bitmap = displayio.OnDiskBitmap("/dirt.bmp")
     bg_sprite = displayio.TileGrid(bg_bitmap, pixel_shader=bg_bitmap.pixel_shader, x=0, y=0)
     splash.append(bg_sprite)
-if(not fast): show_bg()
+
+if(not fast): show_bg() # Don't display bitmap in fast mode
 
 def render_text(text, font, x, y, color=0xFFFFFF):
     text_area = label.Label(
