@@ -73,7 +73,6 @@ async def load_fonts():
     font_big = bitmap_font.load_font(font_file_big)
     font_small = bitmap_font.load_font(font_file_small)
 
-
 # Show background texture
 async def show_bg():
     global bg_bitmap
@@ -94,6 +93,7 @@ async def setup_wifi():
 
 # Run both tasks in parallel
 async def main():
+    await load_fonts()
     if not fast:
         await show_bg()
     await setup_wifi()
