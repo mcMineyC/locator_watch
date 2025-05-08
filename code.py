@@ -112,7 +112,7 @@ clock_text = render_text(get_clock_text(ntp), font_big, display.width // 2, 30, 
 date_text = render_text(get_date_text(ntp), font_small, display.width // 2, 70, color=color_palette[1])
 lat_text = render_text(prep_loc(lat), font_big, display.width // 2, 140, color=color_palette[2])
 long_text = render_text(prep_loc(long), font_big, display.width // 2, 200, color=color_palette[3])
-display.auto_refresh = True # Don't show bg yet
+# display.auto_refresh = True # Don't show bg yet
 display.refresh()
 while True:
     time.sleep(random.random()/5)
