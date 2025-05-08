@@ -100,6 +100,17 @@ async def main():
     await load_fonts()
     print("Connecting to WiFi")
     await setup_wifi()
+    print("WiFi connected")
+    print("Starting NTP")
+    # Wait for NTP to sync
+    while True:
+        try:
+            ntp.datetime
+            break
+        except OSError:
+            print("NTP sync failed, retrying...")
+            await asyncio.sleep(1)
+    print("NTP synced")
 
 asyncio.run(main())
 
