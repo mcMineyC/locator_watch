@@ -39,13 +39,13 @@ long = 3984
 # Release any resources currently in use for the displays
 displayio.release_displays()
 spi = busio.SPI(clock=board.GP18, MOSI=board.GP19)
-print("Setting up SPI for 24MHz")
+"""print("Setting up SPI for 24MHz")
 while not spi.try_lock():
     pass
 spi.configure(baudrate=24000000)  # Configure SPI for 24MHz
 spi.unlock()
 print("SPI setup complete")
-
+"""
 # Set up display SPI bus
 tft_cs = board.GP17
 tft_dc = board.GP20
