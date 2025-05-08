@@ -129,6 +129,7 @@ async def main():
             print("NTP sync failed, retrying...")
             await asyncio.sleep(1)
     print("NTP synced")
+    splash.remove(main_label)
 
 asyncio.run(main())
 
