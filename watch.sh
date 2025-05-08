@@ -28,7 +28,7 @@ if [ "$INSTALLED" == "false" ]; then
         # Check if there are modified but uncommitted files
         CHANGED_FILES=$(git status --porcelain | grep '^[ M]')
         if [ -z "$CHANGED_FILES" ]; then
-            echo "No changes to commit."
+            # echo "No changes to commit."
             sleep 1
             continue
         else
