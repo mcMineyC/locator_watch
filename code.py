@@ -120,6 +120,11 @@ while True:
     long += random.randint(-50, 50)
     lat_text.text = prep_loc(lat)
     long_text.text = prep_loc(long)
-    clock_text.text = get_clock_text(ntp)
+
+    # Update clock and date
+    clock_txt = get_clock_text(ntp)
+    date_txt = get_date_text(ntp)
+    if(clock_text.text != clock_txt): clock_text.text = clock_txt
+    if(date_text.text != date_txt): date_text.text = date_txt
     date_text.text = get_date_text(ntp)
     display.refresh()
