@@ -26,7 +26,7 @@ fi
 if [ "$INSTALLED" == "false" ]; then
     while true; do
         # Check if there are modified but uncommitted files
-        CHANGED_FILES=$(git status --porcelain | grep '^[ MDU\?]')
+        CHANGED_FILES=$(git status --porcelain)
         if [ -z "$CHANGED_FILES" ]; then
             # echo "No changes to commit."
             sleep 1

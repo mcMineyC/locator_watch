@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the list of changed files
-CHANGED_FILES=$(git diff --name-only HEAD HEAD~1)
+CHANGED_FILES=$(git status --porcelain)
 
 # Check if there are any changed files
 if [ -z "$CHANGED_FILES" ]; then
@@ -59,7 +59,19 @@ if [ ! -d "$CP_PATH" ]; then
 fi
 # Copy the changed files to the CircuitPython drive
 for file in $CHANGED_FILES; do
-    # Check if the file is a Python file
-    cp "$file" "$CP_PATH"
+    file_path=$(echo "$file" | awk '{print $2}')
+    action=$(echo "$file" | awk '{print $1}')
+    if [ "$action" == "D" ]; then
+        echo "Skipping deleted file: $file_path"
+        rm "$CP_PATH/$file_path"
+    elif [ "$action" == "M" ]; then
+        echo "Copying modified file: $file_path"
+        cp "$file_path" "$CP_PATH/$file_path"
+    elif [ "$action" == "??" ]; then
+        echo "Copying added file: $file_path"
+    else
+        echo "Unknown action $action for file: $file_path"
+        continue
+    fi
 done
 echo "Copied $(echo "$CHANGED_FILES" | wc -l) files to $CP_PATH"
