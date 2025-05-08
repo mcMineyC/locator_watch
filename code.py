@@ -115,7 +115,7 @@ long_text = render_text(prep_loc(long), font_big, display.width // 2, 200, color
 # display.auto_refresh = True # Don't show bg yet
 display.refresh()
 while True:
-    time.sleep(random.random()/5)
+    time.sleep(random.random())
     lat += random.randint(-50, 50)
     long += random.randint(-50, 50)
     lat_text.text = prep_loc(lat)
