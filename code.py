@@ -80,15 +80,17 @@ async def show_bg():
     if bg_bitmap is False: 
         bg_bitmap = displayio.OnDiskBitmap("/dirt.bmp")
     bg_sprite = displayio.TileGrid(bg_bitmap, pixel_shader=bg_bitmap.pixel_shader, x=0, y=0)
-    splash.append(bg_sprite)
+    splash.insert(0, bg_sprite)
 main_label = label.Label(
-            terminalio.FONT,
-            text="Loading...",
-            color=0xFFFFFF,
-            scale=2,
-            anchor_point=(0.5, 0.5),
-            anchored_position=(display.width // 2, display.height // 2),
-        )
+    terminalio.FONT,
+    text="Loading...",
+    color=0xFFFFFF,
+    scale=2,
+    anchor_point=(0.5, 0.5),
+    anchored_position=(display.width // 2, display.height // 2),
+)
+splash.append(main_label)
+display.refresh()
 # Set up WiFi
 async def setup_wifi():
     if wifi_ssid is None:
