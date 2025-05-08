@@ -82,7 +82,7 @@ async def show_bg():
     bg_sprite = displayio.TileGrid(bg_bitmap, pixel_shader=bg_bitmap.pixel_shader, x=0, y=0)
     splash.insert(0, bg_sprite)
 main_label = label.Label(
-    terminalio.FONT,
+    font_small,
     text="Loading...",
     color=0xFFFFFF,
     scale=2,
