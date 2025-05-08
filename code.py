@@ -61,32 +61,9 @@ display = ST7789(display_bus, width=320, height=240, rotation=270, auto_refresh=
 splash = displayio.Group()
 display.root_group = splash
 
-# Set up WiFi
-if wifi_ssid is None:
-    print("WiFi credentials are kept in settings.toml, please add them there!")
-    raise ValueError("SSID not found in environment variables")
-
-try:
-    wifi.radio.connect(wifi_ssid, wifi_password)
-except ConnectionError:
-    print("Failed to connect to WiFi with provided credentials")
-    raise LookupError("Failed to connect to WiFi")
-
-pool = socketpool.SocketPool(wifi.radio)
-ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
-
-bg_bitmap = False
+# Load fonts
 font_big = bitmap_font.load_font(font_file_big)
 font_small = bitmap_font.load_font(font_file_small)
-
-color_bitmap = displayio.Bitmap(display.width, display.height, 1)
-color_palette = displayio.Palette(4)
-color_palette[0] = 0xFFFFFF # Clock
-color_palette[1] = 0xFFFFFF # Date
-color_palette[2] = 0x00FF00 # Lat
-color_palette[3] = 0xFF0000 # Long
-
-display.auto_refresh = False # Don't show bg yet
 
 # Show background texture
 def show_bg():
@@ -97,6 +74,32 @@ def show_bg():
     splash.append(bg_sprite)
 
 if(not fast): show_bg() # Don't display bitmap in fast mode
+
+
+
+# Set up WiFi
+if wifi_ssid is None:
+    print("WiFi credentials are kept in settings.toml, please add them there!")
+    # raise ValueError("SSID not found in environment variables")
+try:
+    wifi.radio.connect(wifi_ssid, wifi_password)
+except ConnectionError:
+    print("Failed to connect to WiFi with provided credentials")
+    # raise LookupError("Failed to connect to WiFi")
+
+pool = socketpool.SocketPool(wifi.radio)
+ntp = adafruit_ntp.NTP(pool, tz_offset=0, cache_seconds=3600)
+
+bg_bitmap = False
+
+color_palette = displayio.Palette(4)
+color_palette[0] = 0xFFFFFF # Clock
+color_palette[1] = 0xFFFFFF # Date
+color_palette[2] = 0x00FF00 # Lat
+color_palette[3] = 0xFF0000 # Long
+
+display.auto_refresh = False # Don't show bg yet
+
 
 def render_text(text, font, x, y, color=0xFFFFFF):
     text_area = label.Label(
