@@ -57,11 +57,12 @@ if [ ! -d "$CP_PATH" ]; then
     echo "CircuitPython drive not found at $CP_PATH"
     exit 1
 fi
-# Copy the changed files to the CircuitPython drive
-for file in $CHANGED_FILES; do
-    echo "Processing file: $file"
-    file_path=$(echo "$file" | awk '{print $2}')
-    action=$(echo "$file" | awk '{print $1}')
+
+# Process each changed file line by line
+echo "$CHANGED_FILES" | while IFS= read -r line; do
+    echo "Processing file: $line"
+    file_path=$(echo "$line" | awk '{print $2}')
+    action=$(echo "$line" | awk '{print $1}')
     if [ "$action" == "D" ]; then
         echo "Skipping deleted file: $file_path"
         rm "$CP_PATH/$file_path"
@@ -70,9 +71,11 @@ for file in $CHANGED_FILES; do
         cp "$file_path" "$CP_PATH/$file_path"
     elif [ "$action" == "??" ]; then
         echo "Copying added file: $file_path"
+        cp "$file_path" "$CP_PATH/$file_path"
     else
         echo "Unknown action $action for file: $file_path"
         continue
     fi
 done
+
 echo "Copied $(echo "$CHANGED_FILES" | wc -l) files to $CP_PATH"
