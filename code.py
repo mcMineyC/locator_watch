@@ -64,7 +64,7 @@ display.auto_refresh = False # Don't show bg yet
 splash = displayio.Group()
 display.root_group = splash
 
-dht = adafruit_dht.DHT22(board.GP22, use_pulseio=False, delay_seconds=2.0)
+dht = adafruit_dht.DHT22(board.GP22, use_pulseio=False)
 
 # Load fonts
 font_big = False
