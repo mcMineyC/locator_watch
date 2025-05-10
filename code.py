@@ -45,7 +45,6 @@ while True:
         print(dht.temperature)
     except RuntimeError as e:
         print("Failed to read DHT sensor, retrying...")
-        continue
 # Release any resources currently in use for the displays
 displayio.release_displays()
 spi = busio.SPI(clock=board.GP18, MOSI=board.GP19)
