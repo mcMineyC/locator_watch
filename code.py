@@ -170,6 +170,8 @@ while True:
         # Read DHT sensor
         temperature = dht.temperature
         humidity = dht.humidity
+        lat = temperature
+        long = humidity
         print("Temperature: {} C".format(temperature))
         print("Humidity: {}%".format(humidity))
     except RuntimeError as e:
@@ -177,6 +179,8 @@ while True:
         continue
     lat += random.randint(-50, 50)
     long += random.randint(-50, 50)
+    lat_text.text = str((lat*9/5)+32)
+    long_text.text = str(long)+"%"
     # lat_text.text = prep_loc(lat)
     # long_text.text = prep_loc(long)
 
