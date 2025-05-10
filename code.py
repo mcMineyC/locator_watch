@@ -42,7 +42,7 @@ dht = adafruit_dht.DHT11(board.GP27)
 while True:
     time.sleep(2) # Wait for DHT to stabilize
     try:
-        print(dht.temperature)
+        print("{}C {}%".format(dht.temperature, dht.humidity))
     except RuntimeError as e:
         print("Failed to read DHT sensor, retrying...")
 # Release any resources currently in use for the displays
