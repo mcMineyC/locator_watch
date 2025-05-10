@@ -38,13 +38,6 @@ fast = False # Fast mode doesn't render background
 lat = -3518
 long = 3984
 
-dht = adafruit_dht.DHT11(board.GP27)
-while True:
-    time.sleep(2) # Wait for DHT to stabilize
-    try:
-        print("{}C {}%".format(dht.temperature, dht.humidity))
-    except RuntimeError as e:
-        print("Failed to read DHT sensor, retrying...")
 # Release any resources currently in use for the displays
 displayio.release_displays()
 spi = busio.SPI(clock=board.GP18, MOSI=board.GP19)
@@ -66,6 +59,7 @@ display_bus = FourWire(spi, command=tft_dc, chip_select=tft_cs, reset=tft_rst)
 # Set up display
 display = ST7789(display_bus, width=320, height=240, rotation=270, auto_refresh=True)
 display.auto_refresh = False # Don't show bg yet
+dht = adafruit_dht.DHT11(board.GP27)
 
 # Make the display context
 splash = displayio.Group()
