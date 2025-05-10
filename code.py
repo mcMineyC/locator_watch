@@ -177,7 +177,7 @@ while True:
         print("Temperature: {} C".format(temperature))
         print("Humidity: {}%".format(humidity))
     except RuntimeError as e:
-        print("Failed to read DHT sensor: {}".format(e))
+        print("{}".format(e))
         continue
     lat += random.randint(-50, 50)
     long += random.randint(-50, 50)
