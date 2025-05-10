@@ -165,7 +165,7 @@ long_text = render_text(prep_loc(long), font_big, display.width // 2, 200, color
 # display.auto_refresh = True # Don't show bg yet
 display.refresh()
 while True:
-    time.sleep(1)
+    time.sleep(2)
     try:
         # Read DHT sensor
         temperature = dht.temperature
