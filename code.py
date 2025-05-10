@@ -166,10 +166,19 @@ long_text = render_text(prep_loc(long), font_big, display.width // 2, 200, color
 display.refresh()
 while True:
     time.sleep(random.random())
+    try:
+        # Read DHT sensor
+        temperature = dht.temperature
+        humidity = dht.humidity
+        print("Temperature: {} C".format(temperature))
+        print("Humidity: {}%".format(humidity))
+    except RuntimeError as e:
+        print("Failed to read DHT sensor: {}".format(e))
+        continue
     lat += random.randint(-50, 50)
     long += random.randint(-50, 50)
-    lat_text.text = prep_loc(lat)
-    long_text.text = prep_loc(long)
+    # lat_text.text = prep_loc(lat)
+    # long_text.text = prep_loc(long)
 
     # Update clock and date
     clock_txt = get_clock_text(ntp)
