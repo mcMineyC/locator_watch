@@ -38,7 +38,7 @@ fast = False # Fast mode doesn't render background
 lat = -3518
 long = 3984
 
-dht = adafruit_dht.DHT22(board.GP2)
+dht = adafruit_dht.DHT22(board.GP27)
 print(dht.temperature)
 # Release any resources currently in use for the displays
 displayio.release_displays()
