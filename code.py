@@ -179,8 +179,8 @@ while True:
     except RuntimeError as e:
         print("{}".format(e))
         continue
-    lat += random.randint(-50, 50)
-    long += random.randint(-50, 50)
+    # lat += random.randint(-50, 50)
+    # long += random.randint(-50, 50)
     lat_text.text = str((lat*9/5)+32)
     long_text.text = str(long)+"%"
     # lat_text.text = prep_loc(lat)
