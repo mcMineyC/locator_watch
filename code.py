@@ -170,6 +170,8 @@ while True:
         # Read DHT sensor
         temperature = dht.temperature
         humidity = dht.humidity
+        if temperature is None or humidity is None:
+            raise RuntimeError("Failed to read DHT sensor")
         lat = temperature
         long = humidity
         print("Temperature: {} C".format(temperature))
