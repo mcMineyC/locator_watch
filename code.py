@@ -174,8 +174,8 @@ while True:
             raise RuntimeError("Failed to read DHT sensor")
         lat = temperature
         long = humidity
-        print("Temperature: {} C".format(temperature))
-        print("Humidity: {}%".format(humidity))
+        # print("Temperature: {} C".format(temperature))
+        # print("Humidity: {}%".format(humidity))
     except RuntimeError as e:
         print("{}".format(e))
         continue
