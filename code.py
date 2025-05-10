@@ -16,6 +16,7 @@ from adafruit_display_text import label
 from adafruit_bitmap_font import bitmap_font
 from fourwire import FourWire
 from adafruit_st7789 import ST7789
+import adafruit_dht
 
 import os
 import socketpool
