@@ -38,6 +38,8 @@ fast = False # Fast mode doesn't render background
 lat = -3518
 long = 3984
 
+dht = adafruit_dht.DHT22(board.GP2)
+print(dht.temperature)
 # Release any resources currently in use for the displays
 displayio.release_displays()
 spi = busio.SPI(clock=board.GP18, MOSI=board.GP19)
@@ -64,7 +66,6 @@ display.auto_refresh = False # Don't show bg yet
 splash = displayio.Group()
 display.root_group = splash
 
-dht = adafruit_dht.DHT22(board.GP22)
 
 # Load fonts
 font_big = False
