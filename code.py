@@ -40,8 +40,8 @@ long = 3984
 
 dht = adafruit_dht.DHT11(board.GP27)
 while True:
+    time.sleep(2) # Wait for DHT to stabilize
     try:
-        time.sleep(2) # Wait for DHT to stabilize
         print(dht.temperature)
     except RuntimeError as e:
         print("Failed to read DHT sensor, retrying...")
