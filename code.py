@@ -39,6 +39,7 @@ lat = -3518
 long = 3984
 
 dht = adafruit_dht.DHT11(board.GP27)
+time.sleep(2) # Wait for DHT to stabilize
 print(dht.temperature)
 # Release any resources currently in use for the displays
 displayio.release_displays()
