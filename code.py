@@ -181,7 +181,7 @@ while True:
         continue
     # lat += random.randint(-50, 50)
     # long += random.randint(-50, 50)
-    lat_text.text = str(int((lat*9/5)+32))
+    lat_text.text = str(int((lat*9/5)+32))+"F"
     long_text.text = str(long)+"%"
     # lat_text.text = prep_loc(lat)
     # long_text.text = prep_loc(long)
